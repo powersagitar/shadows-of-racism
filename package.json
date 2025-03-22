@@ -11,6 +11,8 @@
     "generate-secret": "bunx auth secret"
   },
   "dependencies": {
+    "@auth/neon-adapter": "^1.8.0",
+    "@neondatabase/serverless": "^0.10.4",
     "@vercel/analytics": "^1.5.0",
     "next": "^15.3.0-canary.17",
     "next-auth": "^5.0.0-beta.25",
