@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
-    "prettier:check": "prettier --check --ignore-unknown ."
+    "prettier:check": "prettier --check --ignore-unknown .",
     "generate-secret": "bunx auth secret"
   },
   "dependencies": {
