@@ -1,6 +1,6 @@
 import { signIn, signOut } from "@/auth";
 
-export default function Session() {
+export default function Account() {
   return (
     <>
       <form
