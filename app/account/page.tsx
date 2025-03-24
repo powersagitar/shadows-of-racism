@@ -19,7 +19,7 @@ export default async function Account() {
     );
   }
 
-  const [user] = (await selectUserByEmail(session.user!.email!)) as [User];
+  const [user] = await selectUserByEmail(session.user!.email!);
 
   if (!user) {
     try {

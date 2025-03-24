@@ -1,6 +1,6 @@
 import "server-only";
 
-import { UserWithoutId } from "../types/user";
+import { User, UserWithoutId } from "../types/user";
 import { neon, neonConfig, Pool } from "@neondatabase/serverless";
 
 import ws from "ws";
@@ -38,9 +38,9 @@ export const addUser = async ({
   await pool.end();
 };
 
-export const selectUserByEmail = async (email: string) => {
+export const selectUserByEmail = async (email: string): Promise<User[]> => {
   const sql = neon(process.env.DATABASE_URL!);
   return sql`
     SELECT * FROM users WHERE email = ${email}
-    `;
+    ` as unknown as User[];
 };
