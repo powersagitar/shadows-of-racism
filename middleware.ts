@@ -6,7 +6,11 @@ const protectedRoutes = ["/artist", "/teacher"];
 export default async function middleware(req: NextRequest) {
   const session = await auth();
 
-  if (!session && protectedRoutes.includes(req.nextUrl.pathname)) {
+  // see https://github.com/powersagitar/shadows-of-racism/pull/1#pullrequestreview-2727370058
+  if (
+    !session &&
+    protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route))
+  ) {
     const newUrl = new URL("/account", req.nextUrl.origin);
     return NextResponse.redirect(newUrl);
   }
