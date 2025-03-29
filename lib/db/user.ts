@@ -25,7 +25,7 @@ export const addUser = async ({
       INSERT INTO users (name, email, role, image)
       VALUES ($1, $2, $3, $4)
       `,
-      [name, email, role, image ?? "NULL"],
+      [name, email, role, image ?? null],
     );
     await client.query("COMMIT");
   } catch (err) {
