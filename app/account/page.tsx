@@ -66,8 +66,8 @@ export default async function Account() {
 }
 
 const getRole = (email: string): User["role"] => {
-  const artistEmail = /^[0-9]{9}@gapps\.yrdsb\.ca$/g;
-  const teacherEmail = /^\w+\.\w+@gapps\.yrdsb\.ca$/g;
+  const artistEmail = /^[0-9]{9}@gapps\.yrdsb\.ca$/;
+  const teacherEmail = /^\w+\.\w+@gapps\.yrdsb\.ca$/;
 
   if (artistEmail.test(email)) {
     return "artist";
