@@ -7,13 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "generate-secret": "bunx auth secret"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "@vercel/analytics": "^1.5.0",
     "next": "^15.2.3",
+    "next-auth": "^5.0.0-beta.25",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "server-only": "^0.0.1",
+    "ws": "^8.18.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -21,6 +26,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/ws": "^8.18.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "prettier": "^3.5.3",
