@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const protectedRoutes = ["/artist", "/teacher"];
 
@@ -8,7 +8,7 @@ export default async function middleware(req: NextRequest) {
 
   if (!session && protectedRoutes.includes(req.nextUrl.pathname)) {
     const newUrl = new URL("/account", req.nextUrl.origin);
-    return Response.redirect(newUrl);
+    return NextResponse.redirect(newUrl);
   }
 }
 
