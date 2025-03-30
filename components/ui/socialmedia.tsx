@@ -34,7 +34,7 @@ export default function SocialMedia({ platform, className }: SocialMediaProps) {
             className={`items-center justify-center ${className}`}
             href={links[platform]}
         >
-            <Icon className="w-full h-full" />
+            <Icon className="h-full" />
         </a>
     );
 }
