@@ -32,7 +32,7 @@ const smIconClass = "h-[20px]";
 
 export default function Footer() {
     return (
-        <div className="flex flex-row justify-between border-t-1 border-gray-300 mx-12 mb-7 pt-10 px-12">
+        <div className="flex flex-row justify-between border-t border-gray-300 mx-12 mb-7 pt-10 px-12">
             <div className="flex flex-col gap-2">
                 <Logo size="30px" />
                 <div className="flex flex-row justify-between">

@@ -12,7 +12,7 @@ export default function Page() {
             </div>
             <div className="flex flex-col gap-2 w-1/2 justify-end">
                 <Logo size="70px" />
-                <p className="text-left font-inter h-auto w-fit mr-15">
+                <p className="text-left font-inter h-auto w-fit mr-16">
                     {placeholder}
                 </p>
             </div>
