@@ -13,9 +13,7 @@ export default function NavBar() {
                 <Button variant="hollow">GALLERY</Button>
                 <Button variant="hollow">ABOUT</Button>
                 <Button variant="hollow">SIGN-IN</Button>
-                {/* Extra Spacing */}
-                <span className="w-1" />
-                <Button variant="default">ENTER ID</Button>
+                <Button variant="default" className="ml-3">ENTER ID</Button>
             </div>
         </div>
     );
