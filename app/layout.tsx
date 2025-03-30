@@ -6,29 +6,29 @@ import Footer from "@/components/layout/footer";
 import { inter, roboto } from "./fonts";
 
 export const metadata: Metadata = {
-    title: "Shadows of Racism",
-    description: "Shadows of Racism",
+  title: "Shadows of Racism",
+  description: "Shadows of Racism",
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
-            <body className="antialiased min-h-screen flex flex-col">
-                <header>
-                    <NavBar />
-                </header>
+  return (
+    <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
+      <body className="antialiased min-h-screen flex flex-col">
+        <header>
+          <NavBar />
+        </header>
 
-                <main className="flex-grow">{children}</main>
+        <main className="flex-grow">{children}</main>
 
-                <footer className="mt-10">
-                    <Footer />
-                </footer>
-                <Analytics />
-            </body>
-        </html>
-    );
+        <footer className="mt-10">
+          <Footer />
+        </footer>
+        <Analytics />
+      </body>
+    </html>
+  );
 }
