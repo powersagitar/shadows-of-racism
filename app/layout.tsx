@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import NavBar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { inter, roboto } from "./fonts";
+import LoginStatus from "@/components/login-status";
 
 export const metadata: Metadata = {
   title: "Shadows of Racism",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className="antialiased min-h-screen flex flex-col">
         <header>
           <NavBar />
+          <LoginStatus />
         </header>
 
         <main className="flex-1 flex flex-col">{children}</main>
