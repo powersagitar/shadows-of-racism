@@ -49,6 +49,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
+
   return (
     <Comp
       data-slot="button"

@@ -29,7 +29,6 @@ export default function RootLayout({
           {" "}
           <Footer />{" "}
         </footer>
-
         <Analytics />
       </body>
     </html>
