@@ -35,7 +35,7 @@ export default async function Account() {
         </form>
       </>
     );
-  } else if (isTeacher(session.user?.email!)) {
+  } else if (session.user?.email && isTeacher(session.user.email)) {
     return (
       <form
         action={async () => {
