@@ -1,6 +1,6 @@
 import { IconProps } from "./types";
 
-export default function LinkedinIcon({ className = "" }: IconProps) {
+export default function LinkedinIcon({ className }: IconProps) {
   return (
     <svg
       className={className}

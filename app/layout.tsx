@@ -22,7 +22,7 @@ export default function RootLayout({
           <NavBar />
         </header>
 
-        <main className="flex-grow">{children}</main>
+        <main className="flex-1 flex flex-col">{children}</main>
 
         <footer className="mt-10">
           <Footer />
