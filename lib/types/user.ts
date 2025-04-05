@@ -1,7 +1,6 @@
 export type UserWithoutId = {
-  name: string;
+  full_name: string;
   email: string;
-  role: "artist" | "teacher";
   image?: string;
 };
 

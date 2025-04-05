@@ -7,9 +7,8 @@ import ws from "ws";
 neonConfig.webSocketConstructor = ws;
 
 export const addUser = async ({
-  name,
+  full_name,
   email,
-  role,
   image,
 }: Readonly<UserWithoutId>) => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
@@ -22,10 +21,10 @@ export const addUser = async ({
     await client.query("BEGIN");
     await client.query(
       `
-      INSERT INTO users (name, email, role, image)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO users (full_name, email, image)
+      VALUES ($1, $2, $3)
       `,
-      [name, email, role, image ?? null],
+      [full_name, email, image ?? null],
     );
     await client.query("COMMIT");
   } catch (err) {
