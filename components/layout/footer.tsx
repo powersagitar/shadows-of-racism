@@ -32,7 +32,7 @@ const smIconClass = "h-[20px]";
 
 export default function Footer() {
   return (
-    <div className="flex flex-row justify-between border-t border-gray-300 mx-12 mb-7 pt-10 px-12">
+    <div className="mx-12 mb-7 flex flex-row justify-between border-t border-gray-300 px-12 pt-10">
       <div className="flex flex-col gap-2">
         <Logo size="30px" />
         <div className="flex flex-row justify-between">
@@ -42,7 +42,7 @@ export default function Footer() {
           <SocialMedia platform="instagram" className={smIconClass} />
         </div>
       </div>
-      <div className="flex flex-row justify-between w-1/3">
+      <div className="flex w-1/3 flex-row justify-between">
         {navitems.map((col, i) => (
           <div className="flex flex-col gap-3" key={i}>
             <span className="font-roboto text-xs">{col.header}</span>

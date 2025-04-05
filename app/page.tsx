@@ -5,14 +5,14 @@ const placeholder =
 
 export default function Page() {
   return (
-    <div className="font-inter flex flex-row gap-10 justify-between">
+    <div className="font-inter flex flex-row justify-between gap-10">
       <div className="w-1/2">
         {/* Placeholder image */}
         <img src="https://picsum.photos/1080/1080" alt="placeholder image" />
       </div>
-      <div className="flex flex-col gap-2 w-1/2 justify-end">
+      <div className="flex w-1/2 flex-col justify-end gap-2">
         <Logo size="70px" />
-        <p className="text-left font-inter h-auto w-fit mr-16">{placeholder}</p>
+        <p className="font-inter mr-16 h-auto w-fit text-left">{placeholder}</p>
       </div>
     </div>
   );

@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="flex flex-row justify-center items-center flex-1 gap-4">
-      <div className="font-roboto leading-[75%] overflow-visible tracking-tighter text-[11rem]">
+    <div className="flex flex-1 flex-row items-center justify-center gap-4">
+      <div className="font-roboto overflow-visible text-[11rem] leading-[75%] tracking-tighter">
         404
       </div>
       <div className="flex flex-col gap-3 text-[1rem]">

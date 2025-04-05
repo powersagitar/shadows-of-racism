@@ -17,12 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
-      <body className="antialiased min-h-screen flex flex-col">
+      <body className="flex min-h-screen flex-col antialiased">
         <header>
           <NavBar />
         </header>
 
-        <main className="flex-1 flex flex-col">{children}</main>
+        <main className="flex flex-1 flex-col">{children}</main>
 
         <footer className="mt-10">
           <Footer />
