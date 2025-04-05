@@ -1,6 +1,6 @@
 import { IconProps } from "./types";
 
-export default function FacebookIcon({ className = "" }: IconProps) {
+export default function FacebookIcon({ className }: IconProps) {
   return (
     <svg
       className={className}

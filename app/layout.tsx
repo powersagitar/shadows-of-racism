@@ -19,15 +19,13 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
         <header>
-          {" "}
-          <NavBar />{" "}
+          <NavBar />
         </header>
 
         <main className="flex-1 flex flex-col">{children}</main>
 
         <footer className="mt-10">
-          {" "}
-          <Footer />{" "}
+          <Footer />
         </footer>
         <Analytics />
       </body>
