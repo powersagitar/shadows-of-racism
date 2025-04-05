@@ -1,19 +1,23 @@
-import Button from "@/components/ui/button";
+import Button, { buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function NavBar() {
     return (
         <div className="w-full justify-between flex flex-row px-7 py-10">
             <div className="font-roboto">
-                <Button variant="hollow" className="font-extrabold text-md">
-                    SHADOW OF RACISM
-                </Button>
+                <Link 
+                    href='/' 
+                    className={`${buttonVariants({ variant: 'hollow' })}`}
+                >
+                    <span className="font-extrabold text-lg">SHADOW OF RACISM</span>
+                </Link>
             </div>
 
             <div className="flex flex-row gap-2">
-                <Button variant="hollow">GALLERY</Button>
-                <Button variant="hollow">ABOUT</Button>
-                <Button variant="hollow">SIGN-IN</Button>
-                <Button variant="default" className="ml-3">ENTER ID</Button>
+                <Link href='/' className={buttonVariants({ variant: 'hollow' })}>GALLERY</Link>
+                <Link href='/' className={buttonVariants({ variant: 'hollow' })}>ABOUT</Link>
+                <Link href='/' className={buttonVariants({ variant: 'hollow' })}>SIGN-IN</Link>
+                <Link href='/' className={`${buttonVariants({ variant: 'default' })} ml-3`}>ENTER ID</Link>
             </div>
         </div>
     );
