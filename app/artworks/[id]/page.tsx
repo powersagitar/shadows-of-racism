@@ -24,7 +24,7 @@ export default async function Artwork({ params }: ArtworkProps) {
       </AspectRatio>
 
       <div className="flex flex-col gap-4">
-        <h2 className="font-roboto text-[4rem] font-[700] -tracking-[0.08rem]">
+        <h2 className="font-roboto -mb-6 text-[4rem] font-[700] -tracking-[0.08rem]">
           {artwork.artist_name}
         </h2>
 
