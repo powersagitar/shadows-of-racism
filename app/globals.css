@@ -125,9 +125,24 @@
     @apply bg-background text-foreground;
   }
   .font-roboto {
-    @apply font-roboto font-medium text-black;
+    @apply font-roboto font-medium text-black text-base;
   }
   .font-inter {
-    @apply font-inter font-normal text-gray-700;
+    @apply font-inter font-normal text-gray-700 sm:text-lg md:text-lg lg:text-xl xl:text-2xl;
   }
+}
+
+@theme {
+
+  --animate-fade-in: fade-in 0.2s ease-out forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
 }
