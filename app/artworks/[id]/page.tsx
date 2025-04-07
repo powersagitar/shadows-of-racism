@@ -36,6 +36,12 @@ export default async function Artwork({ params }: ArtworkProps) {
           {artwork.medium} | {artwork.width} x {artwork.height} | school | date
         </div>
 
+        <audio
+          controls
+          src={artwork.description_recording_url}
+          className="my-2 w-full"
+        />
+
         <p className="font-inter leading-[150%] font-[2rem]">
           {artwork.description}
         </p>
