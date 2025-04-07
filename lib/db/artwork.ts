@@ -51,3 +51,10 @@ export const retrieveArtworks = async (
     offset: offset + pageSize,
   };
 };
+
+export const selectArtworkById = async (id: number): Promise<Artwork[]> => {
+  const sql = neon(process.env.DATABASE_URL!);
+  return sql`
+    SELECT * FROM artworks WHERE artwork_id = ${id}
+  ` as unknown as Artwork[];
+};
