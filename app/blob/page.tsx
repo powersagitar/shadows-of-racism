@@ -4,6 +4,7 @@ import { selectUserByEmail } from "@/lib/db/user";
 import { User } from "@/lib/types/user";
 import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
+import { v7 as uuidv7 } from "uuid";
 
 type FormProps = {
   user: Readonly<User>;
@@ -12,11 +13,12 @@ type FormProps = {
 async function Form({ user: { id: uploader_id } }: FormProps) {
   async function uploadImage(formData: FormData) {
     "use server";
-    const imageFile = formData.get("image") as File;
 
-    // TODO: give artworks better names
+    const imageFile = formData.get("image") as File;
+    const ext = imageFile.type.split("/")[1];
+
     const { url: artwork_url } = await put(
-      "artworks/" + imageFile.name,
+      `artworks/${uuidv7()}.${ext}`,
       imageFile,
       {
         access: "public",
