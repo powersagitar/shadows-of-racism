@@ -9,7 +9,7 @@ type FormProps = {
   user: Readonly<User>;
 };
 
-export async function Form({ user: { id: uploader_id } }: FormProps) {
+async function Form({ user: { id: uploader_id } }: FormProps) {
   async function uploadImage(formData: FormData) {
     "use server";
     const imageFile = formData.get("image") as File;
