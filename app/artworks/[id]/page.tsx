@@ -25,26 +25,19 @@ export default async function Artwork({ params }: ArtworkProps) {
 
       <div className="flex flex-col gap-4">
         <h2 className="font-roboto text-[4rem] font-[700] -tracking-[0.08rem]">
-          [artist]
+          {artwork.artist_name}
         </h2>
 
         <h1 className="font-roboto text-[6rem] font-[700] -tracking-[0.12rem]">
-          <i>[artwork name]</i>
+          <i>{artwork.title}</i>
         </h1>
 
         <div className="font-inter leading-[150%] font-[2rem]">
-          medium | size | school | date
+          {artwork.medium} | {artwork.width} x {artwork.height} | school | date
         </div>
 
         <p className="font-inter leading-[150%] font-[2rem]">
-          Excepteur efficient emerging, minim veniam anim aute carefully curated
-          Ginza conversation exquisite perfect nostrud nisi intricate Content.
-          Qui international first-class nulla ut. Punctual adipisicing,
-          essential lovely queen tempor eiusmod irure. Exclusive izakaya
-          charming Scandinavian impeccable aute quality of life soft power
-          pariatur Melbourne occaecat discerning. Qui wardrobe aliquip, et
-          Porter destination Toto remarkable officia Helsinki excepteur Basset
-          hound. Zürich sleepy perfect consectetur.
+          {artwork.description}
         </p>
       </div>
     </div>
