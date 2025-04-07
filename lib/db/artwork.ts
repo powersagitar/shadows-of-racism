@@ -11,6 +11,11 @@ export const insertArtwork = async ({
   uploader_id,
   artist_name,
   title,
+  medium,
+  width,
+  height,
+  description,
+  description_recording_url,
 }: ArtworkWithoutId) => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   pool.on("error", (err) => console.error(err));
@@ -21,10 +26,20 @@ export const insertArtwork = async ({
     await client.query("BEGIN");
     await client.query(
       `
-      INSERT INTO artworks (artwork_url, uploader_id, artist_name, title)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO artworks (artwork_url, uploader_id, artist_name, title, medium, width, height, description, description_recording_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       `,
-      [artwork_url, uploader_id, artist_name, title],
+      [
+        artwork_url,
+        uploader_id,
+        artist_name,
+        title,
+        medium,
+        width,
+        height,
+        description,
+        description_recording_url,
+      ],
     );
     await client.query("COMMIT");
   } catch (err) {
