@@ -1,19 +1,24 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { selectArtworkById } from "@/lib/db/artwork";
+import Image from "next/image";
 
 type ArtworkProps = {
-  params: Promise<{ id: number }>;
+  params: Promise<{ id: string }>;
 };
 
 export default async function Artwork({ params }: ArtworkProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const id = (await params).id;
+  // TODO: error handling
+  const id = parseInt((await params).id);
+  const [artwork] = await selectArtworkById(id);
 
   return (
     <div className="mx-24 grid grid-cols-2 items-end gap-8">
       <AspectRatio ratio={50.5625 / 65.375}>
-        <img
-          src="https://picsum.photos/1920/1080"
+        <Image
+          src={artwork.artwork_url}
           alt=""
+          width={809}
+          height={1046}
           className="h-full w-full shrink-0 object-cover"
         />
       </AspectRatio>
