@@ -14,15 +14,24 @@ async function Form({ user: { id: uploader_id } }: FormProps) {
   async function uploadImage(formData: FormData) {
     "use server";
 
+    const uuid = uuidv7();
+
     const imageFile = formData.get("image") as File;
-    const ext = imageFile.type.split("/")[1];
+    const imageFileExt = imageFile.type.split("/")[1];
 
     const { url: artwork_url } = await put(
-      `artworks/${uuidv7()}.${ext}`,
+      `artworks/${uuid}/artwork.${imageFileExt}`,
       imageFile,
-      {
-        access: "public",
-      },
+      { access: "public" },
+    );
+
+    const audioFile = formData.get("recording") as File;
+    const audioFileExt = audioFile.type.split("/")[1];
+
+    const { url: description_recording_url } = await put(
+      `artworks/${uuid}/description.${audioFileExt}`,
+      audioFile,
+      { access: "public" },
     );
 
     await insertArtwork({
@@ -30,6 +39,11 @@ async function Form({ user: { id: uploader_id } }: FormProps) {
       uploader_id,
       artist_name: "dummy",
       title: "masterpiece",
+      medium: "paint",
+      width: 1920,
+      height: 1080,
+      description: "this is a masterpice",
+      description_recording_url,
     });
 
     revalidatePath("/");
@@ -38,7 +52,17 @@ async function Form({ user: { id: uploader_id } }: FormProps) {
   return (
     <form action={uploadImage}>
       <label htmlFor="image">Image</label>
-      <input type="file" id="image" name="image" required />
+      <input type="file" id="image" name="image" accept="image" required />
+
+      <label htmlFor="image">recording</label>
+      <input
+        type="file"
+        id="recording"
+        name="recording"
+        accept="audio"
+        required
+      />
+
       <button>Upload</button>
     </form>
   );
