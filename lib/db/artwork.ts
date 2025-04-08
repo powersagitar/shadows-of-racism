@@ -16,7 +16,21 @@ export const insertArtwork = async (artwork: ArtworkWithoutId) => {
     await client.query("BEGIN");
     await client.query(
       `
-      INSERT INTO artworks (artwork_url, uploader_id, artist_name, title, medium, width, height, depth, school, creation_date, description, description_recording_url)
+      INSERT INTO artworks
+      (
+        artwork_url,
+        uploader_id,
+        artist_name,
+        title,
+        medium,
+        width,
+        height,
+        depth,
+        school,
+        creation_date,
+        description,
+        description_recording_url
+      )
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       `,
       [
@@ -52,7 +66,10 @@ export const selectArtworks = async (
   offset: number,
 ): Promise<{ artworks: Artwork[]; offset: number }> => {
   const artworks = (await sql`
-    SELECT * FROM artworks ORDER BY artwork_id LIMIT ${pageSize} OFFSET ${offset}
+    SELECT * FROM artworks
+    ORDER BY artwork_id
+    LIMIT ${pageSize}
+    OFFSET ${offset}
   `) as Artwork[];
 
   return {
@@ -63,7 +80,8 @@ export const selectArtworks = async (
 
 export const selectArtworkById = async (id: number): Promise<Artwork[]> => {
   return sql`
-    SELECT * FROM artworks WHERE artwork_id = ${id}
+    SELECT * FROM artworks
+    WHERE artwork_id = ${id}
   ` as unknown as Artwork[];
 };
 
