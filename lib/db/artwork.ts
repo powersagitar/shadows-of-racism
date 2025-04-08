@@ -61,10 +61,22 @@ export const insertArtwork = async (artwork: ArtworkWithoutId) => {
 
 const sql = neon(process.env.DATABASE_URL!);
 
+export const selectArtworkById = async (id: number): Promise<Artwork[]> => {
+  return sql`
+    SELECT * FROM artworks
+    WHERE artwork_id = ${id}
+  ` as unknown as Artwork[];
+};
+
+type ArtworksPaginatedResponse = {
+  artworks: Artwork[];
+  offset: number;
+};
+
 export const selectArtworks = async (
   pageSize: number,
   offset: number,
-): Promise<{ artworks: Artwork[]; offset: number }> => {
+): Promise<ArtworksPaginatedResponse> => {
   const artworks = (await sql`
     SELECT * FROM artworks
     ORDER BY artwork_id
@@ -78,18 +90,11 @@ export const selectArtworks = async (
   };
 };
 
-export const selectArtworkById = async (id: number): Promise<Artwork[]> => {
-  return sql`
-    SELECT * FROM artworks
-    WHERE artwork_id = ${id}
-  ` as unknown as Artwork[];
-};
-
 export const selectArtworksBySchool = async (
   school: School,
   pageSize: number,
   offset: number,
-): Promise<{ artworks: Artwork[]; offset: number }> => {
+): Promise<ArtworksPaginatedResponse> => {
   const artworks = (await sql`
     SELECT * FROM artworks
     WHERE school = ${school}
