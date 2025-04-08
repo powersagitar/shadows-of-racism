@@ -8,6 +8,24 @@ CREATE TABLE users
     PRIMARY KEY (id)
 );
 
+CREATE TYPE school AS ENUM
+(
+    'Ashton Meadows PS',
+    'Castlemore PS',
+    'Coledale PS',
+    'David Suzuki PS',
+    'Franklin Street PS',
+    'Legacy PS',
+    'Nokiidaa PS',
+    'Reesor Park PS',
+    'Roy H. Crosby PS',
+    'William Armstrong PS',
+    'Bill Crothers SS',
+    'Markham District HS',
+    'Unionville HS',
+    'Parkview PS'
+);
+
 CREATE TABLE artworks
 (
     artwork_id SERIAL UNIQUE NOT NULL,
@@ -19,6 +37,9 @@ CREATE TABLE artworks
     medium VARCHAR(255) NOT NULL,
     width INTEGER NOT NULL,
     height INTEGER NOT NULL,
+    depth INTEGER,
+    school SCHOOL NOT NULL,
+    creation_date DATE NOT NULL,
     description TEXT NOT NULL,
     description_recording_url TEXT UNIQUE NOT NULL,
 

@@ -18,7 +18,10 @@ export default async function Artworks(props: ArtworksProps) {
       <h1>artworks</h1>
 
       {artworks.map((artwork) => (
-        <img src={artwork.artwork_url} key={artwork.artwork_url} />
+        <img
+          src={artwork.artwork_url.toString()}
+          key={artwork.artwork_url.toString()}
+        />
       ))}
 
       <form

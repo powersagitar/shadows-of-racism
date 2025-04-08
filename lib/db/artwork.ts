@@ -14,6 +14,9 @@ export const insertArtwork = async ({
   medium,
   width,
   height,
+  depth,
+  school,
+  creation_date,
   description,
   description_recording_url,
 }: ArtworkWithoutId) => {
@@ -26,19 +29,22 @@ export const insertArtwork = async ({
     await client.query("BEGIN");
     await client.query(
       `
-      INSERT INTO artworks (artwork_url, uploader_id, artist_name, title, medium, width, height, description, description_recording_url)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      INSERT INTO artworks (artwork_url, uploader_id, artist_name, title, medium, width, height, depth, school, creation_date, description, description_recording_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       `,
       [
-        artwork_url,
+        artwork_url.toString(),
         uploader_id,
         artist_name,
         title,
         medium,
         width,
         height,
+        depth,
+        school,
+        creation_date.toISOString(),
         description,
-        description_recording_url,
+        description_recording_url.toString(),
       ],
     );
     await client.query("COMMIT");

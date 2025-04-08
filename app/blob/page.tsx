@@ -19,7 +19,7 @@ async function Form({ user: { id: uploader_id } }: FormProps) {
     const imageFile = formData.get("image") as File;
     const imageFileExt = imageFile.type.split("/")[1];
 
-    const { url: artwork_url } = await put(
+    const { url: artworkUrl } = await put(
       `artworks/${uuid}/artwork.${imageFileExt}`,
       imageFile,
       { access: "public" },
@@ -28,22 +28,28 @@ async function Form({ user: { id: uploader_id } }: FormProps) {
     const audioFile = formData.get("recording") as File;
     const audioFileExt = audioFile.type.split("/")[1];
 
-    const { url: description_recording_url } = await put(
+    const { url: recordingUrl } = await put(
       `artworks/${uuid}/description.${audioFileExt}`,
       audioFile,
       { access: "public" },
     );
 
+    const depth = formData.get("depth") as unknown as number;
+
     await insertArtwork({
-      artwork_url,
+      artwork_url: new URL(artworkUrl),
       uploader_id,
       artist_name: "dummy",
       title: "masterpiece",
       medium: "paint",
       width: 1920,
       height: 1080,
-      description: "this is a masterpice",
-      description_recording_url,
+      depth,
+      school: "Unionville HS",
+      creation_date: new Date(),
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mollis mauris justo, a convallis nunc faucibus quis. Sed sed libero placerat, volutpat nisl id, fringilla lorem. Aenean eget leo vel risus consequat eleifend sed in libero. Pellentesque a ligula vulputate, posuere felis ac, interdum eros. In ac enim venenatis, pretium tortor luctus, dignissim tellus. Aliquam erat volutpat. Nam gravida dignissim placerat. Nunc tempor, nibh at congue placerat, tortor quam tempor erat, vitae placerat risus ipsum eu dui. Nunc dapibus, metus vel aliquet fringilla, ante metus cursus lorem, ac suscipit leo est in est. Praesent quis dui mauris. Ut sed elementum tellus. Nam vel magna et massa finibus sollicitudin non non velit.",
+      description_recording_url: new URL(recordingUrl),
     });
 
     revalidatePath("/");
@@ -51,17 +57,20 @@ async function Form({ user: { id: uploader_id } }: FormProps) {
 
   return (
     <form action={uploadImage}>
-      <label htmlFor="image">Image</label>
-      <input type="file" id="image" name="image" accept="image" required />
+      <label>Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required />
 
-      <label htmlFor="image">recording</label>
+      <label>recording</label>
       <input
         type="file"
         id="recording"
         name="recording"
-        accept="audio"
+        accept="audio/*"
         required
       />
+
+      <label>depth</label>
+      <input type="number" id="depth" name="depth" required />
 
       <button>Upload</button>
     </form>

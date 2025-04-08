@@ -1,6 +1,7 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { selectArtworkById } from "@/lib/db/artwork";
 import Image from "next/image";
+import { format } from "date-fns";
 
 type ArtworkProps = {
   params: Promise<{ id: string }>;
@@ -15,7 +16,7 @@ export default async function Artwork({ params }: ArtworkProps) {
     <div className="mx-24 grid grid-cols-2 items-end gap-8">
       <AspectRatio ratio={50.5625 / 65.375}>
         <Image
-          src={artwork.artwork_url}
+          src={artwork.artwork_url.toString()}
           alt=""
           width={809}
           height={1046}
@@ -33,12 +34,14 @@ export default async function Artwork({ params }: ArtworkProps) {
         </h1>
 
         <div className="font-inter leading-[150%] font-[2rem]">
-          {artwork.medium} | {artwork.width} x {artwork.height} | school | date
+          {artwork.medium} | {artwork.height} x {artwork.width}{" "}
+          {artwork.depth && <>x {artwork.depth}</>} | {artwork.school} |{" "}
+          {format(artwork.creation_date, "yyyy-MM-dd")}
         </div>
 
         <audio
           controls
-          src={artwork.description_recording_url}
+          src={artwork.description_recording_url.toString()}
           className="my-2 w-full"
         />
 
