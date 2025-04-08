@@ -3,7 +3,7 @@ import "server-only";
 import { neon, neonConfig, Pool } from "@neondatabase/serverless";
 
 import ws from "ws";
-import { Artwork, ArtworkWithoutId } from "../types/artwork";
+import { Artwork, ArtworkWithoutId, School } from "../types/artwork";
 neonConfig.webSocketConstructor = ws;
 
 export const insertArtwork = async (artwork: ArtworkWithoutId) => {
@@ -45,11 +45,12 @@ export const insertArtwork = async (artwork: ArtworkWithoutId) => {
   await pool.end();
 };
 
+const sql = neon(process.env.DATABASE_URL!);
+
 export const selectArtworks = async (
   pageSize: number,
   offset: number,
 ): Promise<{ artworks: Artwork[]; offset: number }> => {
-  const sql = neon(process.env.DATABASE_URL!);
   const artworks = (await sql`
     SELECT * FROM artworks ORDER BY artwork_id LIMIT ${pageSize} OFFSET ${offset}
   `) as Artwork[];
@@ -61,8 +62,26 @@ export const selectArtworks = async (
 };
 
 export const selectArtworkById = async (id: number): Promise<Artwork[]> => {
-  const sql = neon(process.env.DATABASE_URL!);
   return sql`
     SELECT * FROM artworks WHERE artwork_id = ${id}
   ` as unknown as Artwork[];
+};
+
+export const selectArtworksBySchool = async (
+  school: School,
+  pageSize: number,
+  offset: number,
+): Promise<{ artworks: Artwork[]; offset: number }> => {
+  const artworks = (await sql`
+    SELECT * FROM artworks
+    WHERE school = ${school}
+    ORDER BY artwork_id
+    LIMIT ${pageSize}
+    OFFSET ${offset} 
+  `) as Artwork[];
+
+  return {
+    artworks,
+    offset: offset + pageSize,
+  };
 };
