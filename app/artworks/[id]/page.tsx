@@ -2,15 +2,24 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { selectArtworkById } from "@/lib/db/artwork";
 import Image from "next/image";
 import { format } from "date-fns";
+import { notFound } from "next/navigation";
 
 type ArtworkProps = {
   params: Promise<{ id: string }>;
 };
 
 export default async function Artwork({ params }: ArtworkProps) {
-  // TODO: error handling
   const id = parseInt((await params).id);
+
+  if (isNaN(id)) {
+    notFound();
+  }
+
   const [artwork] = await selectArtworkById(id);
+
+  if (!artwork) {
+    notFound();
+  }
 
   return (
     <div className="mx-24 grid grid-cols-2 items-end gap-8">
