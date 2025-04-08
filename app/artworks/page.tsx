@@ -1,4 +1,4 @@
-import { retrieveArtworks } from "@/lib/db/artwork";
+import { selectArtworks } from "@/lib/db/artwork";
 import { redirect } from "next/navigation";
 
 type ArtworksProps = {
@@ -11,7 +11,7 @@ export default async function Artworks(props: ArtworksProps) {
   // https://stackoverflow.com/a/7540412/20143641
   const offset = parseInt(searchParams["offset"]) || 0;
 
-  const { artworks, offset: newOffset } = await retrieveArtworks(2, offset);
+  const { artworks, offset: newOffset } = await selectArtworks(2, offset);
 
   return (
     <>

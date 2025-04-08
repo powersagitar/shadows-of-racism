@@ -58,7 +58,7 @@ export const insertArtwork = async ({
   await pool.end();
 };
 
-export const retrieveArtworks = async (
+export const selectArtworks = async (
   pageSize: number,
   offset: number,
 ): Promise<{ artworks: Artwork[]; offset: number }> => {

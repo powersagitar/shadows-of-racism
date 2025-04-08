@@ -6,7 +6,7 @@ import { neon, neonConfig, Pool } from "@neondatabase/serverless";
 import ws from "ws";
 neonConfig.webSocketConstructor = ws;
 
-export const addUser = async ({
+export const insertUser = async ({
   full_name,
   email,
   image,

@@ -1,5 +1,5 @@
 import { auth, signIn, signOut } from "@/auth";
-import { addUser, selectUserByEmail } from "@/lib/db/user";
+import { insertUser, selectUserByEmail } from "@/lib/db/user";
 import { revalidatePath } from "next/cache";
 
 export default async function Account() {
@@ -40,7 +40,7 @@ export default async function Account() {
       <form
         action={async () => {
           "use server";
-          await addUser({
+          await insertUser({
             full_name: session.user!.name!,
             email: session.user!.email!,
             image: session.user!.image ?? undefined,
