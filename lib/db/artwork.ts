@@ -108,3 +108,22 @@ export const selectArtworksBySchool = async (
     offset: offset + pageSize,
   };
 };
+
+export const selectArtworksByUploader = async (
+  uploaderId: number,
+  pageSize: number,
+  offset: number,
+): Promise<ArtworksPaginatedResponse> => {
+  const artworks = (await sql`
+    SELECT * FROM artworks
+    WHERE uploader_id = ${uploaderId}
+    ORDER BY artwork_id
+    LIMIT ${pageSize}
+    OFFSET ${offset} 
+  `) as Artwork[];
+
+  return {
+    artworks,
+    offset: offset + pageSize,
+  };
+};
