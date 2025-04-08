@@ -9,7 +9,11 @@
     "lint": "next lint",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check --ignore-unknown .",
-    "generate-secret": "bunx auth secret"
+    "generate-secret": "bunx auth secret",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
@@ -42,6 +46,8 @@
     "@types/ws": "^8.18.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4.0.17",
