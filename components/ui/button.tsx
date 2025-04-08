@@ -11,7 +11,8 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-primary text-primary-foreground shadow-xs hover:bg-background hover:text-black border-2 border-black",
-        hollow: "bg-background hover:underline",
+        hollow: "bg-transparent hover:underline",
+        fakeinput: "bg-transparent text-foreground justify-start items-start border-1 shadow-2xs p-0 text-base font-inter text-black text-sm hover:no-underline",
         destructive:
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:

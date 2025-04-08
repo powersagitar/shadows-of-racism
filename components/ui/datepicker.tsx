@@ -3,20 +3,20 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 type DatePickerProps = {
     toggleButton: React.ReactNode,
-    date: Date,
+    selected: Date,
     onSelect: (selection: Date|undefined) => void
 }
 
-export default function DatePicker({ toggleButton, date, onSelect }: DatePickerProps) {
+export default function DatePicker({ toggleButton, selected, onSelect }: DatePickerProps) {
     return (
-        <Popover>
+        <Popover modal>
           <PopoverTrigger asChild>
             { toggleButton }
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
               mode="single"
-              selected={date}
+              selected={selected}
               onSelect={onSelect}
               initialFocus
             />

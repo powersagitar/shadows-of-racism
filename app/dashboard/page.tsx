@@ -1,18 +1,11 @@
 'use client'
 
 import Button from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import DatePicker from "@/components/ui/datepicker";
-import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import SkeletonImage from "@/components/ui/skeletonimage";
-import { CheckedState } from "@radix-ui/react-checkbox";
-import { format } from "date-fns";
 import { useCallback, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from 'zod'
-import { zodResolver } from "@hookform/resolvers/zod"
+import EditDialog from "./editdialog";
 
 export type Artwork = {
     name: string,
@@ -20,7 +13,7 @@ export type Artwork = {
     medium: string,
     creationDate: Date,
     description: string,
-    dimension: {
+    dimensions: {
         h: number,
         w: number,
         d?: number
@@ -68,7 +61,7 @@ const fetchUserData = async (): Promise<UserData> => {
             medium: 'Example Medium',
             creationDate: new Date('2024-12-11'),
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas perferendis rerum id accusamus nihil, quidem nemo aliquid cupiditate, beatae quis nostrum et inventore debitis alias nisi ducimus? Nesciunt, asperiores obcaecati!',
-            dimension: { h:6, w:9 },
+            dimensions: { h:6, w:9, d:12 },
             image: new URL('https://picsum.photos/1920/1920'),
             id: 'example-id'
         }))
@@ -121,8 +114,7 @@ export default function Page() {
             <div className="flex flex-col gap-14 px-40">
                 <span className="text-5xl font-roboto font-medium">Artworks</span>
                 <div className="grid grid-cols-[repeat(auto-fit,30rem)] justify-center gap-10">
-                    <AddArtworkButton onClick={()=>{}} />
-                    <DatePicker date={creationDate} onSelect={(d)=>{if(d) setCreationDate(d)}} toggleButton={<Button className="w-10">Button</Button>} />
+                    <AddArtworkButton />
                     { userData ? 
                         userData.artworks.map((art, i) => <ArtworkItem key={i} onClick={()=>{}} artwork={art} />)
                         : 
@@ -134,13 +126,17 @@ export default function Page() {
     )
 }
 
-function AddArtworkButton({ onClick }: { onClick:()=>void }) {
+function AddArtworkButton() {
     return (
-        <div className="relative justify-between aspect-[1/1] border-3 border-black" onClick={onClick} >
-            {/* idk how to make a cross so enjoy this horribly made one using borders */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-l-3 w-0 h-24 border-black" />
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-t-3 w-24 h-0 border-black" />
-        </div>
+        <EditDialog submit={()=>{}} 
+            openButton={(
+                <div className="relative justify-between aspect-[1/1] border-3 border-black" >
+                    {/* idk how to make a cross so enjoy this horribly made one using borders */}
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-l-3 w-0 h-24 border-black" />
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-t-3 w-24 h-0 border-black" />
+                </div>
+            )} 
+        />
     )
 }
 
