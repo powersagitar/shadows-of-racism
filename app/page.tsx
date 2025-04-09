@@ -6,7 +6,6 @@ const placeholder =
 
 export default function Page() {
   return (
-<<<<<<< HEAD
     <div className="font-inter flex flex-row gap-10 justify-between">
       {/* Placeholder image */}
       <SkeletonImage
@@ -20,16 +19,6 @@ export default function Page() {
         <p className="text-left font-inter h-auto w-fit mr-16 leading-normal">
           {placeholder}
         </p>
-=======
-    <div className="font-inter flex flex-row justify-between gap-10">
-      <div className="w-1/2">
-        {/* Placeholder image */}
-        <img src="https://picsum.photos/1080/1080" alt="placeholder image" />
-      </div>
-      <div className="flex w-1/2 flex-col justify-end gap-2">
-        <Logo size="70px" />
-        <p className="font-inter mr-16 h-auto w-fit text-left">{placeholder}</p>
->>>>>>> d6677ab8faf0c11f7b761644f4f478b4bc12f749
       </div>
     </div>
   );
