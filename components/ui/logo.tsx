@@ -1,7 +1,7 @@
 export default function Logo({ size }: { size: string | number }) {
   return (
     <div
-      className={`flex flex-col gap-0 font-medium font-roboto leading-[75%] overflow-visible tracking-tighter`}
+      className={`font-roboto flex flex-col gap-0 overflow-visible leading-[75%] font-medium tracking-tighter`}
       style={{ fontSize: size }}
     >
       <span>SHADOWS</span>

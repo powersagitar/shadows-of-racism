@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NavBar() {
   return (
-    <div className="w-full justify-between flex flex-row px-7 py-10">
+    <div className="flex w-full flex-row justify-between px-7 py-10">
       <div className="font-roboto">
         <Button variant="hollow" asChild>
           <Link href="/" className="">
