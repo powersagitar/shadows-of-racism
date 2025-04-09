@@ -1,3 +1,5 @@
+'use server'
+
 import Button from "@/components/ui/button";
 import SkeletonImage from "@/components/ui/skeletonimage";
 import EditDialog from "./editdialog";

@@ -1,5 +1,3 @@
-"use server";
-
 import { Skeleton } from "@/components/ui/skeleton";
 
 export type Artwork = {
@@ -17,7 +15,7 @@ export type Artwork = {
   id: string;
 };
 
-export default async function PageSkeleton() {
+export default function PageSkeleton() {
   return (
     <div className="flex flex-col gap-40 flex-1">
       <div className="w-full flex flex-row gap-20">

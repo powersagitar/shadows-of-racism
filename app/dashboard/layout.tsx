@@ -1,9 +1,7 @@
-"use server";
-
 import React, { Suspense } from "react";
 import PageSkeleton from "./pageskeleton";
 
-export default async function Layout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;

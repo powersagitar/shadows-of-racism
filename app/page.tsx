@@ -1,12 +1,10 @@
-"use server";
-
 import Logo from "@/components/ui/logo";
 import SkeletonImage from "@/components/ui/skeletonimage";
 
 const placeholder =
   "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta ex autem id inventore consectetur, laborum culpa reiciendis sunt nam libero dignissimos eos dolorem placeat facere fugiat voluptas obcaecati asperiores eius Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta ex autem id inventore consectetur, laborum culpa reiciendis sunt nam libero dignissimos eos dolorem placeat facere fugiat voluptas obcaecati asperiores eius Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta ex autem id inventore consectetur, laborum culpa reiciendis sunt nam libero dignissimos eos dolorem placeat facere fugiat voluptas obcaecati asperiores eius Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta ex autem id inventore consectetur, laborum culpa reiciendis sunt nam libero dignissimos eos dolorem placeat facere fugiat voluptas obcaecati asperiores eius";
 
-export default async function Page() {
+export default function Page() {
   return (
     <div className="font-inter flex flex-row gap-10 justify-between">
       {/* Placeholder image */}
