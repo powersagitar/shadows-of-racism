@@ -17,53 +17,6 @@ export type Artwork = {
   id: string;
 };
 
-type UserData = {
-  name: string;
-  remaining: number;
-  students: number;
-  items: number;
-  artworks: Artwork[];
-};
-
-const testArtworks = [
-  { name: "Skibidi Toilet", artist: "Mohan Dong" },
-  { name: "Fanum Tax", artist: "Paste" },
-  { name: "Insanity Maxxing", artist: "fluf" },
-  { name: "Skibidi Toilet", artist: "Mohan Dong" },
-  { name: "Fanum Tax", artist: "Paste" },
-  { name: "Insanity Maxxing", artist: "fluf" },
-  { name: "Skibidi Toilet", artist: "Mohan Dong" },
-  { name: "Fanum Tax", artist: "Paste" },
-  { name: "Insanity Maxxing", artist: "fluf" },
-  { name: "Skibidi Toilet", artist: "Mohan Dong" },
-  { name: "Fanum Tax", artist: "Paste" },
-  { name: "Insanity Maxxing", artist: "fluf" },
-  { name: "Skibidi Toilet", artist: "Mohan Dong" },
-  { name: "Fanum Tax", artist: "Paste" },
-  { name: "Insanity Maxxing", artist: "fluf" },
-];
-
-// simulate fetching user data
-const fetchUserData = async (): Promise<UserData> => {
-  await new Promise((res) => setTimeout(res, 2000));
-  return {
-    name: "Mohan Dong",
-    remaining: 69,
-    students: 10,
-    items: 10,
-    artworks: testArtworks.map((e) => ({
-      ...e,
-      medium: "Example Medium",
-      creationDate: new Date("2024-12-11"),
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas perferendis rerum id accusamus nihil, quidem nemo aliquid cupiditate, beatae quis nostrum et inventore debitis alias nisi ducimus? Nesciunt, asperiores obcaecati!",
-      dimensions: { h: 6, w: 9, d: 12 },
-      image: new URL("https://picsum.photos/1920/1920"),
-      id: "example-id",
-    })),
-  };
-};
-
 export default async function PageSkeleton() {
   return (
     <div className="flex flex-col gap-40 flex-1">

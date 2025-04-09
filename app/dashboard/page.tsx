@@ -1,7 +1,7 @@
 import Button from "@/components/ui/button";
 import SkeletonImage from "@/components/ui/skeletonimage";
 import EditDialog from "./editdialog";
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
 
 export type Artwork = {
   name: string;
@@ -62,7 +62,7 @@ const fetchUserData = async (): Promise<UserData> => {
 };
 
 const getGreeting = () => {
-  const hour = DateTime.now().setZone('America/Toronto').hour;
+  const hour = DateTime.now().setZone("America/Toronto").hour;
   if (hour < 12) return "Good morning";
   if (hour < 18) return "Good afternoon";
   return "Good evening";

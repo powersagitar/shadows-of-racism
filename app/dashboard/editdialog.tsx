@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { useCallback, useState } from "react";
-import { z, ZodDate } from "zod";
+import { z } from "zod";
 import { Artwork } from "./page";
 import {
   Dialog,
@@ -54,12 +54,9 @@ type EditDialogProps = {
 const descPlaceholder =
   "The Mona Lisa is a half-length portrait painting by the Italian artist Leonardo da Vinci.";
 
-export default function EditDialog({
-  openButton,
-  artwork,
-}: EditDialogProps) {
+export default function EditDialog({ openButton, artwork }: EditDialogProps) {
   const [includeDepth, setIncludeDepth] = useState(!!artwork?.dimensions.d);
-    
+
   const [open, setOpen] = useState(false);
 
   const toggleIncludeDepth = useCallback(
@@ -77,40 +74,45 @@ export default function EditDialog({
   });
 
   const submit = useCallback((form: z.infer<typeof formSchema>) => {
-      alert('Form submit successful')
-      console.log(form);
-  }, [])
+    alert("Form submit successful");
+    console.log(form);
+  }, []);
 
-  const confirmClose = useCallback((event: Event) => {
-        event.preventDefault()
-    
+  const confirmClose = useCallback(
+    (event: Event) => {
+      event.preventDefault();
+
       // change to fancier ways later if desire
-        if (form.formState.isDirty) {
-            if (window.confirm('Are you sure you want to discard unsaved changes?')) {
-                form.reset()
-                setOpen(false);
-            }
-        } else setOpen(false);
-  }, [form])
+      if (form.formState.isDirty) {
+        if (
+          window.confirm("Are you sure you want to discard unsaved changes?")
+        ) {
+          form.reset();
+          setOpen(false);
+        }
+      } else setOpen(false);
+    },
+    [form],
+  );
 
-    /*
-     * I didn't use .map() here is because
-     * there are special types of input that only appear once
-     * (e.g. date/dimensions)
-     * 
-     * so if someone have a cleaner way of doing this go ahead
-    */
+  /*
+   * I didn't use .map() here is because
+   * there are special types of input that only appear once
+   * (e.g. date/dimensions)
+   *
+   * so if someone have a cleaner way of doing this go ahead
+   */
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {/* A DialogTitle is required for screen readers and to keep redix happy */}
       <DialogTitle className="hidden">Manage Artwork</DialogTitle>
       <DialogTrigger asChild>{openButton}</DialogTrigger>
-      <DialogContent 
+      <DialogContent
         className="rounded-none border-3 border-black p-7 w-fit h-[80vh] overflow-y-scroll"
-        onEscapeKeyDown={confirmClose} 
+        onEscapeKeyDown={confirmClose}
         onInteractOutside={confirmClose}
         showCloseButton={false}
-    >
+      >
         <div className="flex flex-row justify-between w-fit flex-1">
           <div className="sticky top-0 max-h-[70vh] max-w-[35vw] w-[40vw] pr-10">
             {artwork ? (

@@ -6,7 +6,7 @@ import React, { useCallback, useState } from "react";
 
 type SkeletonImageProps =
   | ({ useHtmlImg: true } & React.ComponentProps<"img">)
-  | ({ useHtmlImg: false | undefined | never } & ImageProps);
+  | ({ useHtmlImg: false | never } & ImageProps);
 
 export default function SkeletonImage({
   useHtmlImg,

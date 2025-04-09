@@ -6,14 +6,14 @@ type DatePickerProps = {
   toggleButton: React.ReactNode;
   selected: Date;
   onSelect: (selection: Date | undefined) => void;
-  disabled?: Matcher | Matcher[]
+  disabled?: Matcher | Matcher[];
 };
 
 export default function DatePicker({
   toggleButton,
   selected,
   onSelect,
-  disabled
+  disabled,
 }: DatePickerProps) {
   return (
     <Popover modal>

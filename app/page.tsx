@@ -10,10 +10,11 @@ export default async function Page() {
   return (
     <div className="font-inter flex flex-row gap-10 justify-between">
       {/* Placeholder image */}
-      <img
+      <SkeletonImage
         src="https://picsum.photos/1500/1080"
         className="w-1/2 min-h-20"
         alt="placeholder image"
+        useHtmlImg
       />
       <div className="flex flex-col gap-2 w-1/2 justify-end">
         <Logo size="5vw" />

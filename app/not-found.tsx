@@ -1,7 +1,9 @@
+"use server";
+
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function Page() {
+export default async function Page() {
   return (
     <div className="flex flex-row justify-center items-center flex-1 gap-4">
       <div className="font-roboto leading-[75%] overflow-visible tracking-tighter text-[11rem]">
