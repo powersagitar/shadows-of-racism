@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   description: "Shadows of Racism",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{

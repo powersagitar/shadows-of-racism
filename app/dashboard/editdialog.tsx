@@ -26,7 +26,6 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import CursorTooltip from "@/components/ui/cursortooltip";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -80,10 +79,8 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
   }, []);
 
   const confirmClose = useCallback(
-    (event: Event | React.MouseEventHandler<HTMLButtonElement>) => {
-
-
-        (event as any)?.preventDefault();
+    (event: Event | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.preventDefault();
 
       // change to fancier ways later if desire
       if (form.formState.isDirty) {
@@ -130,7 +127,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
           </div>
 
           <Form {...form}>
-            {" "}
+            
             <form
               onSubmit={form.handleSubmit(submit)}
               className="flex flex-col gap-4 w-[30vw] max-h-full overflow-y-scroll px-2"
@@ -181,7 +178,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                     name="dimensions.h"
                     render={({ field }) => (
                       <FormItem>
-                        {" "}
+                        
                         <FormControl>
                           <Input
                             placeholder="Height"
@@ -189,7 +186,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                             className="w-[6rem]"
                             {...field}
                           />
-                        </FormControl>{" "}
+                        </FormControl>
                       </FormItem>
                     )}
                   />
@@ -199,7 +196,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                     name="dimensions.w"
                     render={({ field }) => (
                       <FormItem>
-                        {" "}
+                        
                         <FormControl>
                           <Input
                             placeholder="Width"
@@ -207,7 +204,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                             className="w-[6rem]"
                             {...field}
                           />
-                        </FormControl>{" "}
+                        </FormControl>
                       </FormItem>
                     )}
                   />
@@ -219,7 +216,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                         name="dimensions.d"
                         render={({ field }) => (
                           <FormItem>
-                            {" "}
+                            
                             <FormControl>
                               <Input
                                 placeholder="Depth"
@@ -227,7 +224,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                                 className="w-[6rem]"
                                 {...field}
                               />
-                            </FormControl>{" "}
+                            </FormControl>
                           </FormItem>
                         )}
                       />
@@ -322,7 +319,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                   SAVE
                 </Button>
               </div>
-            </form>{" "}
+            </form>
           </Form>
         </div>
       </DialogContent>
