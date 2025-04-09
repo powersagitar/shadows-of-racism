@@ -1,3 +1,5 @@
+"use server";
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -5,12 +7,16 @@ import NavBar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { inter, roboto } from "./fonts";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Shadows of Racism",
   description: "Shadows of Racism",
 };
 
-export default function RootLayout({
+export async function generateMetadata() {
+  return metadata;
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
