@@ -7,7 +7,7 @@ export default function NavBar() {
       <div className="font-roboto">
         <Button variant="hollow" asChild>
           <Link href="/" className="">
-            <span className="text-lg font-extrabold">SHADOWS OF RACISM</span>
+            <span className="font-extrabold text-lg">SHADOWS OF RACISM</span>
           </Link>
         </Button>
       </div>
