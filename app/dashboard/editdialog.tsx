@@ -27,25 +27,6 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 
-const formSchema = z.object({
-  name: z.string().min(1),
-  artist: z.string().min(1),
-  dimensions: z.object({
-    w: z.number().min(0),
-    h: z.number().min(0),
-    d: z.number().min(0).optional(),
-  }),
-  medium: z.string().min(1),
-  date: z.date().max(new Date(), { message: "Time travelling is prohibited" }),
-  description: z.string(),
-  image: z
-    .instanceof(File)
-    .refine((file) => file instanceof File, {
-      message: "A file is required.",
-    })
-    .optional(),
-});
-
 type EditDialogProps = {
   openButton: React.ReactNode;
   artwork?: Artwork;
@@ -64,12 +45,36 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
     [],
   );
 
+  const formSchema = z.object({
+    name: z.string().min(1),
+    artist: z.string().min(1),
+    dimensions: z.object({
+      w: z.number().min(0),
+      h: z.number().min(0),
+      d: z.number().min(0).optional(),
+    }),
+    medium: z.string().min(1),
+    date: z.date().max(today(), { message: "Time travelling is prohibited" }),
+    description: z.string(),
+    imagefile: (() => {
+        const img = z
+          .instanceof(File)
+          .refine((file) => file instanceof File && file.type.startsWith('image/'), {
+            message: "A file is required.",
+          })
+
+      if (artwork) return img.optional();
+
+      return img;
+    })()
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: new Date(),
+      date: today(),
       ...artwork,
-      image: undefined,
+      imagefile: undefined,
     },
   });
 
@@ -280,9 +285,12 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                             {format(field.value, "PPP")}
                           </Button>
                         }
-                        onSelect={field.onChange}
+                        onSelect={(date) => {
+                            date?.setUTCHours(0,0,0,0)
+                            field.onChange(date)
+                        }}
                         selected={field.value}
-                        disabled={{ after: new Date() }}
+                        disabled={{ after: today() }}
                       />
                     </FormControl>
                   </FormItem>
@@ -325,4 +333,11 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
       </DialogContent>
     </Dialog>
   );
+}
+
+// to prevent weirdness caused by different times in the same day
+function today(){
+    const d = new Date;
+    d.setUTCHours(0,0,0,0);
+    return d;
 }
