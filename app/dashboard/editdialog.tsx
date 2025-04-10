@@ -73,6 +73,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       date: today(),
+      dimensions: { w:0, h:0 },
       ...artwork,
       imagefile: undefined,
     },
@@ -88,6 +89,8 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
       event.preventDefault();
 
       // change to fancier ways later if desire
+
+      console.log(form)
       if (form.formState.isDirty) {
         if (
           window.confirm("Are you sure you want to discard unsaved changes?")
@@ -127,7 +130,11 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
                 useHtmlImg
               />
             ) : (
-              "Click to upload image"
+                <div className="border-2 border-black h-full w-full relative cursor-pointer">
+                    <span className="absolute left-1/2 top-1/2 -translate-1/2 font-roboto text-lg">
+                        Click to upload image
+                    </span>
+                </div>
             )}
           </div>
 
@@ -315,14 +322,14 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
               <div className="flex flex-row justify-between gap-2 mt-auto">
                 <Button
                   type="reset"
-                  className="font-roboto font-lg font-bold w-1/2 px-10 py-5"
+                  className="font-roboto font-lg font-bold w-1/2 px-10 py-5 cursor-pointer"
                   onClick={confirmClose}
                 >
                   DISCARD CHANGES
                 </Button>
                 <Button
                   type="submit"
-                  className="font-roboto font-lg font-bold px-10 py-5 w-1/2"
+                  className="font-roboto font-lg font-bold px-10 py-5 w-1/2 cursor-pointer"
                 >
                   SAVE
                 </Button>

@@ -23,7 +23,6 @@ export type Artwork = {
 type UserData = {
   name: string;
   remaining: number;
-  students: number;
   items: number;
   artworks: Artwork[];
 };
@@ -49,7 +48,6 @@ const fetchUserData = async (): Promise<UserData> => {
   return {
     name: "Mohan Dong",
     remaining: 69,
-    students: 10,
     items: 10,
     artworks: testArtworks.map((e, i) => ({
       ...e,
@@ -75,7 +73,7 @@ export default async function Page() {
   const greeting = getGreeting();
 
   return (
-    <div className="flex flex-col gap-40 flex-1">
+    <div className="flex flex-col gap-40 flex-1 cursor-default">
       <div className="w-full flex flex-row gap-20">
         <SkeletonImage
           src="https://picsum.photos/1500/1080"
@@ -91,8 +89,7 @@ export default async function Page() {
             There are {userData.remaining} days until the exhibition
           </p>
           <p className="font-inter my-2 animate-fade-in">
-            You have added {userData.students} students, who have submitted a
-            total of {userData.items} items
+            You have submitted a total of {userData.items} items
           </p>
         </div>
       </div>
@@ -138,7 +135,7 @@ function ArtworkItem({ artwork }: { artwork: Artwork }) {
       <EditDialog
         artwork={artwork}
         openButton={
-          <Button className="p-6 w-full font-bold mx-auto">
+          <Button className="p-6 w-full font-bold mx-auto cursor-pointer">
             MANAGE ARTWORK
           </Button>
         }
