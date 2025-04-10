@@ -27,7 +27,7 @@ export default function CursorTooltip({
     }
 
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [visible]);
+  }, [visible, handleMouseMove]);
 
   const clonedTrigger = React.cloneElement(trigger, {
     onMouseEnter: (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -44,10 +44,13 @@ export default function CursorTooltip({
 
   useEffect(() => {
     const portalRoot = document.body;
-    portalRoot.appendChild(elRef.current);
+
+    // to keep react happy
+    const elRefCopy = elRef.current;
+    portalRoot.appendChild(elRefCopy);
 
     return () => {
-      portalRoot.removeChild(elRef.current);
+      portalRoot.removeChild(elRefCopy);
     };
   }, []);
 

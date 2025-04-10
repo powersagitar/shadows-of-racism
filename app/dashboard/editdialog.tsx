@@ -61,7 +61,7 @@ export default function EditDialog({ openButton, artwork }: EditDialogProps) {
 
   const toggleIncludeDepth = useCallback(
     (e: CheckedState) => setIncludeDepth(e === true),
-    [includeDepth],
+    [],
   );
 
   const form = useForm<z.infer<typeof formSchema>>({

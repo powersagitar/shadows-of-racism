@@ -6,7 +6,7 @@ import React, { useCallback, useState } from "react";
 
 type SkeletonImageProps =
   | ({ useHtmlImg: true } & React.ComponentProps<"img">)
-  | ({ useHtmlImg: false | never } & ImageProps);
+  | ({ useHtmlImg?: false } & ImageProps);
 
 export default function SkeletonImage({
   useHtmlImg,
@@ -21,7 +21,7 @@ export default function SkeletonImage({
       setLoaded(true);
       if (onLoad) onLoad(event);
     },
-    [],
+    [onLoad],
   );
 
   const commonClass = loaded

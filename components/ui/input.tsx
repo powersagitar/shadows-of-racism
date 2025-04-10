@@ -26,7 +26,7 @@ function Input({
 
       if (onBlur) onBlur(e);
     },
-    [],
+    [validator, onBlur],
   );
 
   const onFocusTrigger = React.useCallback(
@@ -35,7 +35,7 @@ function Input({
 
       if (onFocus) onFocus(e);
     },
-    [],
+    [onFocus],
   );
 
   return (
