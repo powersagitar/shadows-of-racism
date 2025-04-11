@@ -1,89 +1,64 @@
-import { auth } from "@/auth";
-import { insertArtwork } from "@/lib/db/artwork";
-import { selectUserByEmail } from "@/lib/db/user";
-import { User } from "@/lib/types/user";
-import { put } from "@vercel/blob";
-import { revalidatePath } from "next/cache";
+"use client";
+
+import { ArtworkClientUploadRequest } from "@/lib/types/artwork";
+import { type PutBlobResult } from "@vercel/blob";
+import { upload } from "@vercel/blob/client";
+import { useState, useRef } from "react";
 import { v7 as uuidv7 } from "uuid";
 
-type FormProps = {
-  user: Readonly<User>;
-};
-
-async function Form({ user: { id: uploader_id } }: FormProps) {
-  async function uploadImage(formData: FormData) {
-    "use server";
-
-    const uuid = uuidv7();
-
-    const imageFile = formData.get("image") as File;
-    const imageFileExt = imageFile.type.split("/")[1];
-
-    const { url: artworkUrl } = await put(
-      `artworks/${uuid}/artwork.${imageFileExt}`,
-      imageFile,
-      { access: "public" },
-    );
-
-    const audioFile = formData.get("recording") as File;
-    const audioFileExt = audioFile.type.split("/")[1];
-
-    const { url: recordingUrl } = await put(
-      `artworks/${uuid}/description.${audioFileExt}`,
-      audioFile,
-      { access: "public" },
-    );
-
-    const depth = formData.get("depth") as unknown as number;
-
-    await insertArtwork({
-      artwork_url: new URL(artworkUrl),
-      uploader_id,
-      artist_name: "dummy",
-      title: "masterpiece",
-      medium: "paint",
-      width: 1920,
-      height: 1080,
-      depth,
-      school: "Unionville HS",
-      creation_date: new Date(),
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mollis mauris justo, a convallis nunc faucibus quis. Sed sed libero placerat, volutpat nisl id, fringilla lorem. Aenean eget leo vel risus consequat eleifend sed in libero. Pellentesque a ligula vulputate, posuere felis ac, interdum eros. In ac enim venenatis, pretium tortor luctus, dignissim tellus. Aliquam erat volutpat. Nam gravida dignissim placerat. Nunc tempor, nibh at congue placerat, tortor quam tempor erat, vitae placerat risus ipsum eu dui. Nunc dapibus, metus vel aliquet fringilla, ante metus cursus lorem, ac suscipit leo est in est. Praesent quis dui mauris. Ut sed elementum tellus. Nam vel magna et massa finibus sollicitudin non non velit.",
-      description_recording_url: new URL(recordingUrl),
-    });
-
-    revalidatePath("/");
-  }
-
+export default function AvatarUploadPage() {
+  const inputFileRef = useRef<HTMLInputElement>(null);
+  const [blob, setBlob] = useState<PutBlobResult | null>(null);
   return (
-    <form action={uploadImage}>
-      <label>Image</label>
-      <input type="file" id="image" name="image" accept="image/*" required />
+    <>
+      <h1>Upload Artwork</h1>
 
-      <label>recording</label>
-      <input
-        type="file"
-        id="recording"
-        name="recording"
-        accept="audio/*"
-        required
-      />
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault();
 
-      <label>depth</label>
-      <input type="number" id="depth" name="depth" required />
+          const uuid = uuidv7();
 
-      <button>Upload</button>
-    </form>
+          if (!inputFileRef.current?.files) {
+            throw new Error("No file selected");
+          }
+
+          const file = inputFileRef.current.files[0];
+          const fileExt = file.type.split("/")[1];
+
+          const metadata: ArtworkClientUploadRequest = {
+            artist_fullname: "Dummy",
+            artist_school: "Unionville HS",
+            artwork_creation_date: new Date(),
+            artwork_height: 1080,
+            artwork_width: 1920,
+            artwork_medium: "Paint",
+            artwork_title: "Masterpiece",
+          };
+
+          const newBlob = await upload(`artworks/${uuid}.${fileExt}`, file, {
+            access: "public",
+            handleUploadUrl: "/api/artworks/upload",
+            clientPayload: JSON.stringify(metadata),
+          });
+
+          setBlob(newBlob);
+        }}
+      >
+        <input
+          name="file"
+          ref={inputFileRef}
+          type="file"
+          accept="image/jpeg, image/png, image/gif"
+          required
+        />
+        <button type="submit">Upload</button>
+      </form>
+      {blob && (
+        <div>
+          Blob url: <a href={blob.url}>{blob.url}</a>
+        </div>
+      )}
+    </>
   );
-}
-
-export default async function Blob() {
-  const session = await auth();
-  if (!session || !session.user?.email) {
-    return null;
-  }
-
-  const [user] = await selectUserByEmail(session.user.email);
-
-  return <Form user={user} />;
 }

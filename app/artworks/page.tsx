@@ -36,7 +36,8 @@ export default async function Artworks(props: ArtworksProps) {
           >
             <Image
               src={artwork.artwork_url.toString()}
-              alt={artwork.description}
+              // alt={artwork.description}
+              alt=""
               width={500}
               height={500}
               className="h-full w-full object-cover"
@@ -44,10 +45,10 @@ export default async function Artworks(props: ArtworksProps) {
 
             <div>
               <p className="font-inter text-[1.5rem] leading-[150%] font-[500]">
-                {artwork.artist_name} | {artwork.school}
+                {artwork.artist_fullname} | {artwork.artist_school}
               </p>
               <h2 className="font-roboto text-[2rem] leading-[150%] font-[700]">
-                <i>{artwork.title}</i>
+                <i>{artwork.artwork_title}</i>
               </h2>
             </div>
           </div>

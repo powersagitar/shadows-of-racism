@@ -2,11 +2,12 @@ import "server-only";
 
 import { neon, neonConfig, Pool } from "@neondatabase/serverless";
 
+import { Artwork, ArtworkServerUploadRequest, School } from "../types/artwork";
+
 import ws from "ws";
-import { Artwork, ArtworkWithoutId, School } from "../types/artwork";
 neonConfig.webSocketConstructor = ws;
 
-export const insertArtwork = async (artwork: ArtworkWithoutId) => {
+export const insertArtwork = async (artwork: ArtworkServerUploadRequest) => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   pool.on("error", (err) => console.error(err));
 
@@ -18,34 +19,31 @@ export const insertArtwork = async (artwork: ArtworkWithoutId) => {
       `
       INSERT INTO artworks
       (
-        artwork_url,
+        artist_fullname,
+        artist_school,
+        artwork_title,
+        artwork_medium,
+        artwork_width,
+        artwork_height,
+        artwork_depth,
+        artwork_creation_date,
         uploader_id,
-        artist_name,
-        title,
-        medium,
-        width,
-        height,
-        depth,
-        school,
-        creation_date,
-        description,
-        description_recording_url
+        artwork_url
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-      `,
+
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    `,
       [
-        artwork.artwork_url.toString(),
+        artwork.artist_fullname,
+        artwork.artist_school,
+        artwork.artwork_title,
+        artwork.artwork_medium,
+        artwork.artwork_width,
+        artwork.artwork_height,
+        artwork.artwork_depth,
+        artwork.artwork_creation_date.toISOString(),
         artwork.uploader_id,
-        artwork.artist_name,
-        artwork.title,
-        artwork.medium,
-        artwork.width,
-        artwork.height,
-        artwork.depth,
-        artwork.school,
-        artwork.creation_date.toISOString(),
-        artwork.description,
-        artwork.description_recording_url.toString(),
+        artwork.artwork_url.toString(),
       ],
     );
     await client.query("COMMIT");

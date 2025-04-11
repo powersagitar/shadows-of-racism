@@ -26,23 +26,43 @@ CREATE TYPE school AS ENUM
     'Parkview PS'
 );
 
-CREATE TABLE artworks
+CREATE TABLE artworks 
 (
+    artist_fullname TEXT NOT NULL,
+    artist_school SCHOOL NOT NULL,
+
+    artwork_title VARCHAR(255) NOT NULL,
+    artwork_medium VARCHAR(255) NOT NULL,
+    artwork_width INTEGER NOT NULL,
+    artwork_height INTEGER NOT NULL,
+    artwork_depth INTEGER,
+    artwork_creation_date DATE NOT NULL,
+
+    uploader_id INTEGER NOT NULL,
     artwork_id SERIAL UNIQUE NOT NULL,
     artwork_url TEXT UNIQUE NOT NULL,
-    uploader_id INTEGER NOT NULL,
-
-    artist_name VARCHAR(255) NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    medium VARCHAR(255) NOT NULL,
-    width INTEGER NOT NULL,
-    height INTEGER NOT NULL,
-    depth INTEGER,
-    school SCHOOL NOT NULL,
-    creation_date DATE NOT NULL,
-    description TEXT NOT NULL,
-    description_recording_url TEXT UNIQUE NOT NULL,
 
     PRIMARY KEY (artwork_id),
     FOREIGN KEY (uploader_id) REFERENCES users (id)
-);
+)
+
+-- CREATE TABLE artworks
+-- (
+--     artwork_id SERIAL UNIQUE NOT NULL,
+--     artwork_url TEXT UNIQUE NOT NULL,
+--     uploader_id INTEGER NOT NULL,
+--
+--     artist_name VARCHAR(255) NOT NULL,
+--     title VARCHAR(255) NOT NULL,
+--     medium VARCHAR(255) NOT NULL,
+--     width INTEGER NOT NULL,
+--     height INTEGER NOT NULL,
+--     depth INTEGER,
+--     school SCHOOL NOT NULL,
+--     creation_date DATE NOT NULL,
+--     description TEXT NOT NULL,
+--     description_recording_url TEXT UNIQUE NOT NULL,
+--
+--     PRIMARY KEY (artwork_id),
+--     FOREIGN KEY (uploader_id) REFERENCES users (id)
+-- );

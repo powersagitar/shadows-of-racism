@@ -1,35 +1,45 @@
-export type School =
-  | "Ashton Meadows PS"
-  | "Castlemore PS"
-  | "Coledale PS"
-  | "David Suzuki PS"
-  | "Franklin Street PS"
-  | "Legacy PS"
-  | "Nokiidaa PS"
-  | "Reesor Park PS"
-  | "Roy H. Crosby PS"
-  | "William Armstrong PS"
-  | "Bill Crothers SS"
-  | "Markham District HS"
-  | "Unionville HS"
-  | "Parkview PS";
+import { z } from "zod";
 
-export type ArtworkWithoutId = {
-  artwork_url: URL;
+const School = z.enum([
+  "Ashton Meadows PS",
+  "Castlemore PS",
+  "Coledale PS",
+  "David Suzuki PS",
+  "Franklin Street PS",
+  "Legacy PS",
+  "Nokiidaa PS",
+  "Reesor Park PS",
+  "Roy H. Crosby PS",
+  "William Armstrong PS",
+  "Bill Crothers SS",
+  "Markham District HS",
+  "Unionville HS",
+  "Parkview PS",
+]);
+
+export type School = z.infer<typeof School>;
+
+export const ArtworkClientUploadRequest = z.object({
+  artist_fullname: z.string().min(1),
+  artist_school: School,
+
+  artwork_title: z.string().min(1),
+  artwork_medium: z.string().min(1),
+  artwork_width: z.number().int().positive(),
+  artwork_height: z.number().int().positive(),
+  artwork_depth: z.number().int().positive().optional(),
+  artwork_creation_date: z.coerce.date().refine((date) => date <= new Date()),
+});
+
+export type ArtworkClientUploadRequest = z.infer<
+  typeof ArtworkClientUploadRequest
+>;
+
+export type ArtworkServerUploadRequest = ArtworkClientUploadRequest & {
   uploader_id: number;
-
-  artist_name: string;
-  title: string;
-  medium: string;
-  width: number;
-  height: number;
-  depth?: number;
-  school: School;
-  creation_date: Date;
-  description: string;
-  description_recording_url: URL;
+  artwork_url: URL;
 };
 
-export type Artwork = ArtworkWithoutId & {
+export type Artwork = ArtworkServerUploadRequest & {
   artwork_id: number;
 };
